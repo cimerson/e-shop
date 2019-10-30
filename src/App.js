@@ -41,7 +41,7 @@ class App extends Component {
                         // }
                     );
 
-                    console.log('Current User', this.state);
+                    // console.log('Current User', this.state);
 
                 });
             }

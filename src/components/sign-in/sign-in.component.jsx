@@ -35,8 +35,8 @@ class SignIn extends Component {
                 <span>Sign in with your email and password</span>
 
                 <form onSubmit={this.onSubmit}>
-                    <FormInput name="email" label="email" type="email" value={this.state.email} onChange={this.onChange} required />
-                    <FormInput name="password" label="password" type="password" value={this.state.password} onChange={this.onChange} required />
+                    <FormInput name="email" label="email" type="email" autoComplete="username" value={this.state.email} onChange={this.onChange} required />
+                    <FormInput name="password" label="password" type="password" autoComplete="current-password" value={this.state.password} onChange={this.onChange} required />
                     <div className='buttons'>
                         <CustomButton type="submit">Sign In</CustomButton> 
                         <CustomButton onClick={signInWithGoogle} isGoogleSignIn>Sign in with Google</CustomButton>

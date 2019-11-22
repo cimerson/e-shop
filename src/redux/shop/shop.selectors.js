@@ -13,12 +13,12 @@ const selecShop = state => state.shop;
 export const selecCollections = createSelector(
     [selecShop],
     shop => shop.collections
-)
+);
 
 export const selecCollectionsForPreview = createSelector(
     [selecCollections],
     collections =>  collections ? Object.keys(collections).map(key => collections[key]) : []
-)
+);
 
 export const selecCollection = collectionUrlParam => 
 createSelector(
@@ -26,4 +26,14 @@ createSelector(
     // collections => collections.find(collection => collection.id === COLLECTION_ID_MAP[collectionUrlParam])
     // denormalized data
     collections => collections ? collections[collectionUrlParam] : null
+);
+
+export const selecCollectionFetching = createSelector(
+    [selecShop],
+    shop => shop.isFetching
+); 
+
+export const selecCollectionIsLoaded = createSelector(
+    [selecShop],
+    shop => !!shop.collections
 )

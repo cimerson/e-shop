@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import FormInput from '../form-input/form-input.component';
@@ -10,21 +11,26 @@ import { googleSignStart, emailSignStart } from '../../redux/user/user.actions';
 
 import './sign-in.styles.scss';
 
-class SignIn extends Component {
+// class SignIn extends Component {
 
-    constructor(props) {
-        super(props)
+//     constructor(props) {
+//         super(props)
     
-        this.state = {
-            email: '',
-            password: '',
-        };
-    }
+//         this.state = {
+//             email: '',
+//             password: '',
+//         };
+//     }
+const SignIn = ({ emailSignStart, googleSignStart }) => {
 
-    onSubmit = async ev => {
+    const [ userCredentials, setUserCredentials ] = useState({ email: '', password: '' });
+
+    const { email, password } = userCredentials;
+
+    const onSubmit = async ev => {
         ev.preventDefault();
 
-        const { email, password } = this.state;
+        // const { email, password } = this.state;
 
         // try {
         //     await auth.signInWithEmailAndPassword(email, password);
@@ -34,36 +40,40 @@ class SignIn extends Component {
         // };
 
         //sagas
-        const { emailSignStart } = this.props;
+        // const { emailSignStart } = this.props;
 
         emailSignStart(email, password);
         
     };
 
-    onChange = ev => {
+    const onChange = ev => {
         const { value, name } = ev.target;
 
-        this.setState({ [name]: value})
+        // this.setState({ [name]: value})
+        setUserCredentials({...userCredentials, [name]: value})
     };
     
-    render() {
+    // render() {
 
-        const { googleSignStart } = this.props;
+        // const { googleSignStart } = this.props;
 
         return (
             <div className="sigin-in">
                 <h2>I already have an account</h2>
                 <span>Sign in with your email and password</span>
 
-                <form onSubmit={this.onSubmit}>
+                {/* <form onSubmit={this.onSubmit}> */}
+                <form onSubmit={onSubmit}>
 
                     <FormInput 
                         name="email"
                         label="email"
                         type="email"
                         autoComplete="username"
-                        value={this.state.email}
-                        onChange={this.onChange}
+                        // value={this.state.email}
+                        value={email}
+                        // onChange={this.onChange}
+                        onChange={onChange}
                         required 
                     />
 
@@ -72,8 +82,10 @@ class SignIn extends Component {
                         label="password" 
                         type="password" 
                         autoComplete="current-password" 
-                        value={this.state.password} 
-                        onChange={this.onChange} 
+                        // value={this.state.password} 
+                        value={password} 
+                        // onChange={this.onChange} 
+                        onChange={onChange} 
                         required 
                     />
 
@@ -86,7 +98,7 @@ class SignIn extends Component {
                 </form>
             </div>
         )
-    }
+    // }
 };
 
 const mapDispatchToProps = dispatch => ({

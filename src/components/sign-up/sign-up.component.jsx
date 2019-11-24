@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+// import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux';
 
 import FrormInput from '../form-input/form-input.component';
@@ -9,24 +10,30 @@ import { signUpStart } from '../../redux/user/user.actions';
 
 import './sign-up.styles.scss';
 
-class SignUp extends Component {
+// class SignUp extends Component {
 
-    constructor() {
-        super()
+//     constructor() {
+//         super()
     
-        this.state = {
-            displayName: '',
-            email: '',
-            password: '',
-            confirmPassword: '',
-        }
-    }
+//         this.state = {
+//             displayName: '',
+//             email: '',
+//             password: '',
+//             confirmPassword: '',
+//         }
+//     }
 
-    onSubmit = async ev => {
+const SignUp = ({ signUpStart }) => {
+
+    const [userCredentials, setUserCredentioals] = useState({displayName: '', email: '', password: '', confirmPassword: ''});
+
+    const { displayName, email, password, confirmPassword } = userCredentials;
+
+    const onSubmit = async ev => {
         ev.preventDefault();
 
-        const { signUpStart } = this.props;
-        const { displayName, email, password, confirmPassword } = this.state;
+        // const { signUpStart } = this.props;
+        // const { displayName, email, password, confirmPassword } = this.state;
 
         if(password !== confirmPassword) {
             alert("password don`t match");
@@ -57,27 +64,30 @@ class SignUp extends Component {
 
     }
 
-    onChange = ev =>{
+    const onChange = ev =>{
         const { name, value } = ev.target;
 
-        this.setState({[name]: value});
+        // this.setState({[name]: value});
+        setUserCredentioals({ ...userCredentials, [name]: value});
     }
     
-    render() {
+    // render() {
 
-        const { displayName, email, password, confirmPassword } = this.state
+        // const { displayName, email, password, confirmPassword } = this.state
 
         return (
             <div className='sign-up'>
                 <h2 className='title'>I do not have a account</h2>
                 <span>Sign up with your email and password</span>
-                <form className='sign-up-form' onSubmit={this.onSubmit}>
+                {/* <form className='sign-up-form' onSubmit={this.onSubmit}> */}
+                <form className='sign-up-form' onSubmit={onSubmit}>
 
                     <FrormInput
                         type='text'
                         name='displayName'
                         value={displayName}
-                        onChange={this.onChange}
+                        // onChange={this.onChange}
+                        onChange={onChange}
                         label='Display Name'
                         required
                     />
@@ -87,7 +97,8 @@ class SignUp extends Component {
                         name='email'
                         autoComplete="username"
                         value={email}
-                        onChange={this.onChange}
+                        // onChange={this.onChange}
+                        onChange={onChange}
                         label='email'
                         required
                     />
@@ -97,7 +108,8 @@ class SignUp extends Component {
                         autoComplete="new-password"
                         name='password'
                         value={password}
-                        onChange={this.onChange}
+                        // onChange={this.onChange}
+                        onChange={onChange}
                         label='Pasword'
                         required
                     />
@@ -107,7 +119,8 @@ class SignUp extends Component {
                         autoComplete="re-new-password"
                         name='confirmPassword'
                         value={confirmPassword}
-                        onChange={this.onChange}
+                        // onChange={this.onChange}
+                        onChange={onChange}
                         label='Confirm Pasword'
                         required
                     />
@@ -117,7 +130,7 @@ class SignUp extends Component {
                 </form>
             </div>
         )
-    }
+    // }
 };
 
 const mapDispatchToProps = dispatch => ({

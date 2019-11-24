@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 // import { createStructuredSelector } from 'reselect';
@@ -20,7 +20,8 @@ import CollectionPageContainer from '../collection/colection.container';
 // const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
 // const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
-class ShopPage extends React.Component {
+// class ShopPage extends React.Component {
+const ShopPage = ({ fetchCollectionsStart, match }) => {
 
     // state = {
     //     loading: true,
@@ -51,18 +52,22 @@ class ShopPage extends React.Component {
     //     });
     // }
 
-    componentDidMount() {
-        // const  { fetchCollectionsStartAsync } = this.props;
-        // fetchCollectionsStartAsync();
-        const  { fetchCollectionsStart } = this.props;
+    // componentDidMount() {
+    //     // const  { fetchCollectionsStartAsync } = this.props;
+    //     // fetchCollectionsStartAsync();
+    //     const  { fetchCollectionsStart } = this.props;
+    //     fetchCollectionsStart();
+    // }
+
+    // hooks
+    useEffect(() => {
         fetchCollectionsStart();
-    }
+    }, [fetchCollectionsStart]);
 
-
-    render() {
+    // render() {
 
         // const { match, isCollectionFetching, isCollectionLoaded } = this.props;
-        const { match } = this.props;
+        // const { match } = this.props;
         // const { loading } = this.state;
 
         // console.log('Shop Page', match);
@@ -81,7 +86,7 @@ class ShopPage extends React.Component {
                 />
             </div>
         )
-    }
+    // }
 };
 
 // const mapStateToProps = createStructuredSelector({
